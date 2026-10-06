@@ -11,4 +11,4 @@ Diese Anwendung ermöglicht das Speichern, Verwalten und Abrufen von ausgewählt
 
 ## Entwickler
 - Mohammed Munem Hossain
-- 
+- Onur Koc
