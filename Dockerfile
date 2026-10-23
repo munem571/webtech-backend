@@ -1,7 +1,10 @@
-FROM eclipse-temurin:21-jdk-alpine
+FROM gradle:8.5-jdk21 AS build
 WORKDIR /app
 COPY . .
-RUN chmod +x gradlew
-RUN ./gradlew build -x test
+RUN gradle build -x test --no-daemon
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8080
-CMD ["java", "-jar", "build/libs/demo-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
